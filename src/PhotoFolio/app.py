@@ -26,18 +26,14 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
-@app.route("/")
+@app.route("/",methods=['GET'])
 def index():
     return render_template("index.html" , date = datetime.now())
 
 @app.route("/upload",methods=['POST'])
 def upload_file():
     file = request.files['file']  # 取得上傳的檔案
-
-    if file.filename == '':           #  若上傳的檔名是空白的… 
-        flash('請選擇要上傳的影像')   # 發出快閃訊息 
-        
-
+    print("點擊上傳")
     if file and allowed_file(file.filename):  # 確認有檔案且副檔名在允許之列
         filename = datetime.now() #轉成時間日期
         flash('影像上傳完畢！')
@@ -59,7 +55,7 @@ def uploaded_file(filename):
 
 @app.route("/result")
 def result():
-    return render_template("result.html")
+    return render_template("gallery.html")
 
 
 if __name__ == "__main__":
