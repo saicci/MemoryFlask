@@ -1,0 +1,26 @@
+<!doctype html>
+<html><title>上傳</title>
+<h1>上傳影像檔</h1>
+<body>
+    <form method="POST" enctype="multipart/form-data" action="/upload">
+        <input type="file" name="filename" accept= ".png, .jpg, .jpeg " required>
+         <input type=submit value=Upload(上傳)>
+        
+    </form>
+    
+         {% with msg = get_flashed_messages() %}
+         {% if msg %}        <!-- 如果msg變數值不是空的… -->
+           {% for m in msg %}
+             <p>{{ m }}</p>  <!-- 顯示快閃訊息 -->
+           {% endfor %}
+         {% endif %}
+        {% endwith %}
+
+    <span class="message">你好!</span> 現在時間 {{ date.strftime("%A, %d %B, %Y at %X") }}.
+      
+    
+
+</body>
+
+
+</html>
