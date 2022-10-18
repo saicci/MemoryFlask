@@ -740,14 +740,12 @@ h6 {
 /*--------------------------------------------------------------
 # Pricing Section
 --------------------------------------------------------------*/
-.gallery {
-  margin-top: 40px;
-}
+
 
 .gallery .gallery-item {
   position: relative;
   overflow: hidden;
-  border-radius: 10px;
+  
 }
 
 .gallery .gallery-item img {
@@ -803,6 +801,10 @@ h6 {
   color: rgba(255, 255, 255, 0.8);
   margin: 0;
 }
+/*-------------------
+copy from
+
+---------------------*/
 
 /*--------------------------------------------------------------
 # Gallery Single Section
@@ -1241,3 +1243,20 @@ h6 {
 .footer .credits a {
   color: var(--color-primary);
 }
+
+/*----------*/
+.masthead {
+  background-size: cover;
+  min-height: 60vh;
+  position: relative;
+  color: white;
+  text-shadow: 2px 2px 2px rgba(0,0,0,.5);
+}
+
+@media (max-width: 768px) {
+  .masthead {
+      min-height: 30vh;
+  }
+
+}
+/*---------------------*/

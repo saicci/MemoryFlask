@@ -4,61 +4,64 @@ from datetime import datetime
 import cv2          # 匯入 OpenCV 函式庫
 import io           #byte io使用
 import numpy as np  # 引入 numpy 模組
-
-from flask import Flask, url_for, redirect,  render_template, request , flash
+import uuid
+from flask import Flask, url_for, redirect,  render_template, request , flash , make_response
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
 from time import strftime
 
-# 取得目前檔案所在的資料夾 
-SRC_PATH = pathlib.Path(__file__).parent.absolute()
-UPLOAD_FOLDER = os.path.join(SRC_PATH,  'static', 'uploads')
-#print(UPLOAD_FOLDER)
+UPLOAD_FOLDER = "static/uploads"
 
-app = Flask(__name__)
-#app.secret_key =  b'_5#y2L"F4Q8z\n\xec]/'       #  設置密鑰 
+# 靜態路由設定
+app = Flask(__name__,
+           
+            template_folder='template',
+            )
+
+app.secret_key =  'key'       #  設置密鑰 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER          # 設置儲存上傳檔的資料夾 
 app.config['MAX_CONTENT_LENGTH'] = 3 * 1024  * 1024  # 上傳檔最大3MB
 
 # 檢查上傳檔的副檔名 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+
+
 def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
-
-@app.route("/",methods=['GET'])
-def index():
-    return render_template("index.html" , date = datetime.now())
-
-@app.route("/upload",methods=['POST'])
-def upload_file():
-    file = request.files['file']  # 取得上傳的檔案
-    print("點擊上傳")
-    if file and allowed_file(file.filename):  # 確認有檔案且副檔名在允許之列
-        filename = datetime.now() #轉成時間日期
-        flash('影像上傳完畢！')
-        # 顯示頁面並傳入上傳的檔名
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+     
+ 
+@app.route('/')
+def home():
+    return render_template('index.html')
+ 
+@app.route('/', methods=['POST'])
+def upload_image():
+    if 'file' not in request.files:
+        flash('No file part')
+        return redirect(request.url)
+    file = request.files['file']
+    if file.filename == '':
+        flash('No image selected for uploading')
+        return redirect(request.url)
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        return redirect(url_for('uploaded_file',
-                                    filename=filename))
-
+        #print('upload_image filename: ' + filename)
+        flash('Image successfully uploaded and displayed below')
+        return render_template('index.html', filename=filename)
     else:
-        flash('僅允許上傳png, jpg, jpeg影像檔')
-    return redirect(url_for('index'))   # 令瀏覽器跳回首頁
+        flash('Allowed image types are - png, jpg, jpeg, gif')
+        return redirect(request.url)
+ 
+@app.route('/display/<filename>')
+def display_image(filename):
+    #print('display_image filename: ' + filename)
+    return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
-
-#對已上傳檔案的訪問服務
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
-
-
-@app.route("/result")
-def result():
-    return render_template("gallery.html")
 
 
 if __name__ == "__main__":
+    app.debug = True
     app.run()
 
     
