@@ -16,24 +16,41 @@
 
 </head>
 <body>
-<div class="container">
-<div class="row">
-     <!-- Background image -->
-     <img src="{{url_for('static', filename='memorypython.jpg')}}">
+<div class="container-fluid">
+    <!--div class = "row justify-content-center"--->
+    {% if showbg == True %}
+        <!-- Background image -->
+        <img src="{{url_for('static', filename='memorypython.jpg')}}">
 
-    <p>
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <ul>
-            {% for message in messages %}
-              <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-          {% endif %}
-        {% endwith %}
-    </p>
-
-         <!-- ======= Gallery Section ======= -->
+        <div>
+            <form method="post" action="/" enctype="multipart/form-data">
+                <dl>
+                    <p>
+                        <input type="file" name="file" 
+                        class="btn2"
+                        autocomplete="off" required>
+                    </p>
+                </dl>
+            <p>
+                <input type="submit" value="上傳" class="btn">
+            </p>
+        </form>
+            <p>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                {% endwith %}
+            </p>
+        </div>
+    {% endif %}
+        
+    <!--/div-->
+    <!-- ======= Gallery Section ======= -->
         <section id="gallery" class="gallery">
         <div class="container-fluid">
 
@@ -55,17 +72,6 @@
         </div>
         </section><!-- End Gallery Section -->
 
-    <form method="post" action="/" enctype="multipart/form-data">
-        <dl>
-            <p>
-                <input type="file" name="file" class="form-control" autocomplete="off" required>
-            </p>
-        </dl>
-        <p>
-            <input type="submit" value="Submit" class="btn btn-info">
-        </p>
-    </form>
-</div>
 </div>
 
     <!-- Vendor JS Files -->

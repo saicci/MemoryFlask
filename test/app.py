@@ -32,7 +32,7 @@ def allowed_file(filename):
  
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html', showbg = True)
  
 @app.route('/', methods=['POST'])
 def upload_image():
@@ -64,20 +64,37 @@ def display_image():    #filename
     basedir = os.walk(basepath)
     gaussdir = os.walk(gausspath)
 
-    nowtime = int (datetime.datetime.now().strftime('%Y%m%d%H%M%S')) #2022 10 18 24:00:00 -> 14位數 
-
+    nowtime = datetime.datetime.now().strftime('%Y%m%d%H%M%S') #2022 10 18 24:00:00 -> 14位數 
+    nowmonth = int ( nowtime[4:6] )
+    nowdate  = int ( nowtime[6:8] )
+    nowhour  = int ( nowtime[8:10])
+    nowminute = int ( nowtime[10:12])
 
     for path, subdirs, files in basedir:
         for file in files:
             #模糊後存檔至gauss資料夾
             defalut = nowtime
-            filenum = int(file[0:14])
-            print('nowtime= ' + str(nowtime)  + ' filenum= ' + str(filenum))
-            try:
-                default = int(filenum)
-            except:
-                default = default
-            value = (int(nowtime/1000000) - int(default/1000000))  #模糊指數 模糊指數只能是奇數且整數
+            filemonth = int( file[4:6] )  #月份
+            filedate  = int( file[6:8] ) #日期
+            filehour  = int( file[8:10])  #小時
+            fileminute  = int( file[10:12])  #分鐘
+            print('nowtime= ' + str(nowtime)  + ' filemonth= ' + str(filemonth) 
+            + ' filedate= ' + str(filedate) + ' filehour= ' + str(filehour)+ ' filemin= ' + str(fileminute))
+
+            #try:
+            #    default = int(filenum)
+            #except:
+            #    default = default
+            
+            #判斷模糊指數的邏輯
+            if nowmonth - filemonth >=1 :
+                value = 99
+            elif nowdate - filedate >= 5:
+                value = 99
+            else :   #計算模糊指數 模糊指數只能是奇數且整數
+                timedelta = nowdate*24*60 + nowhour*60 + nowminute - ( filedate*24*60 + filehour*60 + fileminute )
+                value = int (timedelta/60)
+
             if value>100 :
                 print(str(value) + '超出99所以模糊指數為99')
                 value=99
@@ -91,8 +108,9 @@ def display_image():    #filename
             #回傳模糊後的圖片
             file_list.append( file )
 
+    file_list.reverse()# 因為是新的插入在前端 所以list反轉
     #response = render_template("index.html", file_list)
-    return render_template("index.html", imagelist=file_list)
+    return render_template("index.html", imagelist=file_list , showbg= False)  
     
  
 
@@ -112,7 +130,7 @@ def ResizeAndSave(img):
     w = 512
     h = 512
 
-    resizeimg = cv2.resize(img, (w, h))   # 產生 512x512 的圖,尺寸一定得是奇數不然會出問題
+    resizeimg = cv2.resize(img, (w, h))   # 產生 512x512 的圖
     # 儲存圖片 save image
     # 第一個參數為圖片路徑(可直接修改副檔名)，第二個為圖片
     # 加上隨機參數以免有檔名重複導致覆蓋掉, 不是最佳解, 但也夠用了, 一秒中抽到同樣數字的機率微乎其微

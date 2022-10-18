@@ -1,9 +1,49 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
-body {
+.container-fluid{
     background-color: #808080;
   }
+/*custom*/
+.container-fluid .btn2 {  /*上船按鈕*/
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: rgb(35, 35, 35);
+    color: white;
+    font-size: 16px;
+    padding: 5px 5px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+/* Style the button and place it in the middle of the container/image */
+.container-fluid .btn {  /*提交按鈕*/
+  margin-top: 30px;  /*跟上傳按鈕距離多遠*/
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: rgb(35, 35, 35);
+  color: white;
+  font-size: 16px;
+  padding: 10px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+/* Make the image responsive */
+.container-fluid img {
+    width: 100%;
+    height: auto;
+  }
+.container-fluid .btn:hover {
+  background-color: black;
+}
+
 
 /*--------------------------------------------------------------
 # Pricing Section
@@ -112,7 +152,7 @@ body {
     background-color: rgba(0, 0, 0, 0.6);
   }
   
-  @media (max-width: 575px) {
+  @media (max-width: 512px) {
   
     .gallery-single .swiper-button-prev,
     .gallery-single .swiper-button-next {
