@@ -10,7 +10,6 @@ import cv2          # 匯入 OpenCV 函式庫
 from io import BytesIO
 import numpy as np  # 引入 numpy 模組
 import datetime
-from PIL import Image
 from io import StringIO
 #import scipy.misc
 
