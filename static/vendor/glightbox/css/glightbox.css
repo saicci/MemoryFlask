@@ -228,7 +228,7 @@
 
 .gslide-inline {
   background: #fff;
-  text-align: left;
+  text-align: center;
   max-height: calc(100vh - 40px);
   overflow: auto;
   max-width: 100%;
@@ -503,13 +503,15 @@ iframe.wait-autoplay {
 .glightbox-clean .gslide-description {
   background: #fff;
 }
-
+/*
 .glightbox-clean .gdesc-inner {
   padding: 22px 20px;
 }
+*/
 
+/*字形改這邊*/
 .glightbox-clean .gslide-title {
-  font-size: 1em;
+  font-size: 1.5em;
   font-weight: normal;
   font-family: arial;
   color: #000;

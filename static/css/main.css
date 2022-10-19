@@ -1,8 +1,23 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
-.container-fluid{
+/*.container-fluid {
     background-color: #808080;
+  }*/
+  .bg {
+    background-color: #808080;
+  }
+  .title{
+    -ms-transform: translate(0%, 20%);
+    transform: translate(0%, 20%);
+    display: flex;
+    justify-content: center;
+    padding-top: 10%;
+    padding-bottom: 5%;
+    font-size: 10em;
+    font-weight: normal;
+    font-family: 'Courier New', Courier, monospace;
+    color: #ffffff;
   }
 /*custom*/
 .container-fluid .btn2 {  /*上船按鈕*/
@@ -11,8 +26,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
-    background-color: rgb(35, 35, 35);
-    color: white;
+    background-color: #343434;  /*背景色*/
+    color: white;  /*沒有選擇檔案 字體顏色*/
     font-size: 16px;
     padding: 5px 5px;
     border: none;
@@ -27,7 +42,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
-  background-color: rgb(35, 35, 35);
+  background-color: #343434;
   color: white;
   font-size: 16px;
   padding: 10px 24px;
@@ -40,8 +55,54 @@
     width: 100%;
     height: auto;
   }
+.container-fluid .frame{
+  padding-left: 7%;
+  padding-right: 7%;
+}
+  
+.container-fluid .galleryimg{
+  
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 5%;
+  padding-bottom: 0%;
+  margin: 40px 0px -25px 0px;
+}
 .container-fluid .btn:hover {
   background-color: black;
+}
+
+
+/*使用 gx-5 gy-5*/
+
+
+.gx-5 {
+  --bs-gutter-x: 3rem;
+}
+
+.gy-5 {
+  --bs-gutter-y: 3rem;  
+}
+
+/*修正打開來的顯示窗*/
+
+.glightbox-clean .gdesc-inner {
+  padding: 0px 35% 0px 35%;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.75);
+  /* 底色設定成跟壓黑的顏色一樣*/
+  /*壓黑的css: glightbox */
+}
+
+/*字形改這邊*/
+.glightbox-clean .gslide-title {
+  background-color: transparent;
+  font-size: 1.5em;
+  font-weight: normal;
+  font-family: 'Courier New', Courier, monospace;
+  color: #343434;
+  margin-bottom: 19px;
+  line-height: 1.4em;
 }
 
 
@@ -68,10 +129,10 @@
   .gallery .gallery-links .preview-link,
   .gallery .gallery-links .details-link {
     font-size: 20px;
-    color: rgba(255, 255, 255, 0.5);
+    /*color: rgba(255, 255, 255, 0.5);*/
     transition: 0.3s;
     line-height: 1.2;
-    margin: 30px 8px 0 8px;
+    margin: 50px 15px 0 15px;
   }
   
   .gallery .gallery-links .preview-link:hover,
@@ -98,11 +159,11 @@
   }
   
   .glightbox-clean .gslide-description {
-    background: #222425;
+    background: #343434;
   }
   
   .glightbox-clean .gslide-title {
-    color: rgba(255, 255, 255, 0.8);
+    color: #808080;
     margin: 0;
   }
   /*-------------------
@@ -119,7 +180,7 @@
   .gallery-single .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet {
     width: 12px;
     height: 12px;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: #808080;
     opacity: 1;
   }
   
@@ -165,7 +226,7 @@
     margin-bottom: 20px;
     padding-bottom: 20px;
     position: relative;
-    font-family: var(--font-secondary);
+    font-family: 'Courier New', Courier, monospace;
   }
 
   
@@ -208,7 +269,7 @@
   }
   
   .gallery-single .portfolio-info .btn-visit:hover {
-    background: #2cbc85;
+    background: #343434;
   }
   
   .gallery-single .portfolio-description h2 {
@@ -216,7 +277,7 @@
     font-weight: 700;
     margin-bottom: 20px;
     color: #fff;
-    font-family: var(--font-secondary);
+    font-family: 'Courier New', Courier, monospace;
   }
   
   .gallery-single .portfolio-description p {

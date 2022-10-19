@@ -69,6 +69,7 @@ def display_image():    #filename
     nowhour  = int ( nowtime[8:10])
     nowminute = int ( nowtime[10:12])
 
+    #imgName = file[0:4]+'/'+file[4:6]+'/'+file[6:8]+' - '+file[8:10]+':'+file[10:12]
     for path, subdirs, files in basedir:
         for file in files:
             #模糊後存檔至gauss資料夾
@@ -109,7 +110,7 @@ def display_image():    #filename
 
     file_list.reverse()# 因為是新的插入在前端 所以list反轉
     #response = render_template("index.html", file_list)
-    return render_template("index.html", imagelist=file_list , showbg= False)  
+    return render_template("index.html", imagelist=file_list , showbg = False)  
     
  
 
@@ -167,3 +168,10 @@ def serve_pil_image(pil_img):
 if __name__ == "__main__":
     app.debug = True
     app.run()
+
+
+#一些網頁垃圾
+#    <!--{% if showbg == True %}-->
+#    <!-- Background image -->
+#    <!-- <img src="{{url_for('static', filename='memorypython.jpg')}}"> -->
+#    <!--{% endif %}-->

@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/ad897c33-bdf0-4744-aeaa-f6886dff7c1e/AppServices/subscriptions/ad897c33-bdf0-4744-aeaa-f6886dff7c1e/resourceGroups/10810102_rg_4768/providers/Microsoft.Web/sites/memory20221019",
+    "appService.deploySubpath": "."
+}

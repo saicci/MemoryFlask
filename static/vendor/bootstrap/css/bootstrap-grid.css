@@ -331,14 +331,17 @@
   --bs-gutter-y: 1.5rem;
 }
 
+/*使用 gx-5 gy-5*/
+
+
 .g-5,
 .gx-5 {
-  --bs-gutter-x: 3rem;
+  --bs-gutter-x: 5rem;
 }
 
 .g-5,
 .gy-5 {
-  --bs-gutter-y: 3rem;
+  --bs-gutter-y: 5rem;  
 }
 
 @media (min-width: 576px) {
@@ -502,14 +505,18 @@
     --bs-gutter-y: 1.5rem;
   }
   .g-sm-5,
+
+/*改這*/
 .gx-sm-5 {
-    --bs-gutter-x: 3rem;
+    --bs-gutter-x: 4.5rem;
   }
   .g-sm-5,
 .gy-sm-5 {
-    --bs-gutter-y: 3rem;
+    --bs-gutter-y: 4.5rem;
   }
 }
+
+
 @media (min-width: 768px) {
   .col-md {
     flex: 1 0 0%;

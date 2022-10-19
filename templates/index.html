@@ -3,10 +3,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />        
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-<!-- Template Main CSS File -->
-<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
-
-
  <!-- Vendor CSS Files -->
  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
  <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
@@ -14,16 +10,19 @@
  <link href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
  <link href="{{ url_for('static', filename='vendor/aos/aos.css') }}" rel="stylesheet">
 
-</head>
-<body>
-<div class="container-fluid">
-    <!--div class = "row justify-content-center"--->
-    {% if showbg == True %}
-        <!-- Background image -->
-        <img src="{{url_for('static', filename='memorypython.jpg')}}">
+ 
+<!-- Template Main CSS File -->
+<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
 
-        <div>
-            <form method="post" action="/" enctype="multipart/form-data">
+<!-- font -->
+
+
+</head>
+<body class="bg">
+<div class="container-fluid">
+    {% if showbg == True %}
+    <div class="title"> Upload </div>
+    <form method="post" action="/" enctype="multipart/form-data">
                 <dl>
                     <p>
                         <input type="file" name="file" 
@@ -34,34 +33,32 @@
             <p>
                 <input type="submit" value="上傳" class="btn">
             </p>
-        </form>
-            <p>
-                {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    <ul>
-                    {% for message in messages %}
-                    <li>{{ message }}</li>
-                    {% endfor %}
-                    </ul>
-                {% endif %}
-                {% endwith %}
-            </p>
-        </div>
+    </form>
+        <p>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+            {% endwith %}
+        </p>
     {% endif %}
-        
-    <!--/div-->
     <!-- ======= Gallery Section ======= -->
         <section id="gallery" class="gallery">
         <div class="container-fluid">
 
-            <div class="row gy-4 justify-content-center">
+            <div class="row gy-5 gx-5 justify-content-center frame">
                 {% for filename in imagelist %}
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 mx-1">
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-8 col-8">
                 <!---  col-7 mx-1 左右 spacer * .25 -->
-                    <div class="gallery-item">
-                    <img src="./static/gauss/{{ filename }}" alt = "{{ filename }}" class="img-fluid">
+                    <div class="gallery-item galleryimg">
+                    {% set imgName = filename[0:4]+'/'+filename[4:6]+'/'+filename[6:8]+' - '+filename[8:10]+':'+filename[10:12] %}
+                    <img src="./static/gauss/{{ filename }}" alt = "{{ imgName }}" class="img-fluid">
                     <div class="gallery-links d-flex align-items-center justify-content-center">
-                    <a href="./static/uploads/{{ filename }}" title="{{ filename }}" 
+                    <a href="./static/uploads/{{ filename }}" title="{{ imgName }}" 
                     class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
                     </div>
                     </div>
