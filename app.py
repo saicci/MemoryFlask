@@ -108,7 +108,8 @@ def display_image():    #filename
             #回傳模糊後的圖片
             file_list.append( file )
 
-    file_list.reverse()# 因為是新的插入在前端 所以list反轉
+    file_list.sort()
+    file_list.reverse()
     #response = render_template("index.html", file_list)
     return render_template("index.html", imagelist=file_list , showbg = False)  
     
