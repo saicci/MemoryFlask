@@ -72,6 +72,7 @@ def display_image():    #filename
     #imgName = file[0:4]+'/'+file[4:6]+'/'+file[6:8]+' - '+file[8:10]+':'+file[10:12]
     for path, subdirs, files in basedir:
         for file in files:
+            if file == ".gitkeep" : continue
             #模糊後存檔至gauss資料夾
             defalut = nowtime
             filemonth = int( file[4:6] )  #月份
@@ -106,6 +107,7 @@ def display_image():    #filename
     for path, subdirs, files in gaussdir:
         for file in files:
             #回傳模糊後的圖片
+            if file == ".gitkeep" : continue
             file_list.append( file )
 
     file_list.sort()
