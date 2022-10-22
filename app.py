@@ -168,9 +168,9 @@ def serve_pil_image(pil_img):
     return send_file(img_io, mimetype='image/png')
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": 
     app.debug = True
-    app.run()
+    app.run(host='0.0.0.0')
 
 
 #一些網頁垃圾
