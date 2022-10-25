@@ -12,6 +12,12 @@ import numpy as np  # 引入 numpy 模組
 import datetime
 from io import StringIO
 #import scipy.misc
+from werkzeug.exceptions import RequestEntityTooLarge
+
+@app.errorhandler(413)
+@app.errorhandler(RequestEntityTooLarge)
+def app_handle_413(e):
+    return 'File Too Large', 413
 
 
 app = Flask(__name__)
@@ -22,6 +28,7 @@ UPLOAD_FOLDER = 'static/uploads/'
 #app.secret_key = "secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+#opencv有一個bug, 當圖片大小超過2^31就會有錯
  
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
  
@@ -98,9 +105,11 @@ def display_image():    #filename
 
             if value>100 :
                 print(str(value) + '超出99所以模糊指數為99')
-                value=99
+                value = 99
             if value%2==0:
-                value+=1
+                value += 1
+            if value < 1:
+                value = 1
             print('value = ' + str(value) )
             GaussianBlur(file , value)
             #value = value + 10  #踩大坑了 因為模糊指數只能是奇數
@@ -126,7 +135,7 @@ def ResizeAndSave(img):
     #opencv  
     filestr = img.read()
     originalImg = numpy.frombuffer(filestr, numpy.uint8)
-    img = cv2.imdecode(originalImg , cv2.IMREAD_UNCHANGED)
+    img = cv2.imdecode(originalImg , cv2.IMREAD_COLOR)
 
     x = 0
     y = 0
@@ -161,11 +170,14 @@ def GaussianBlur(file, blurValue):
     path = './static/gauss/'+ file
     cv2.imwrite(path, output1)
 
-def serve_pil_image(pil_img):
-    img_io = StringIO()
-    pil_img.save(img_io, 'png', quality=70)
-    img_io.seek(0)
-    return send_file(img_io, mimetype='image/png')
+
+
+#垃圾
+#def serve_pil_image(pil_img):
+#    img_io = StringIO()
+#    pil_img.save(img_io, 'png', quality=70)
+#    img_io.seek(0)
+#    return send_file(img_io, mimetype='image/png')
 
 
 if __name__ == "__main__": 
