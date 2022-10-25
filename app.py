@@ -14,11 +14,6 @@ from io import StringIO
 #import scipy.misc
 from werkzeug.exceptions import RequestEntityTooLarge
 
-@app.errorhandler(413)
-@app.errorhandler(RequestEntityTooLarge)
-def app_handle_413(e):
-    return 'File Too Large', 413
-
 
 app = Flask(__name__)
 
