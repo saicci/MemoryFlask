@@ -34,6 +34,9 @@ def allowed_file(filename):
 @app.route('/')
 def home():
     return render_template('index.html', showbg = True)
+
+
+
  
 @app.route('/', methods=['POST'])
 def upload_image():
@@ -57,6 +60,29 @@ def upload_image():
         flash('Allowed image types are - png, jpg, jpeg, gif')
         return redirect(request.url)
  
+@app.route('/video')
+def display_movie():    #filename
+    file_list = []
+    basepath ='./static/movie_uploads'
+    gausspath = './static/movie'
+    basedir = os.walk(basepath)
+    gaussdir = os.walk(gausspath)
+
+    for path, subdirs, files in basedir:
+        for file in files:
+            if file == ".gitkeep" : continue
+
+    for path, subdirs, files in gaussdir:
+        for file in files:
+            #回傳模糊後的圖片
+            if file == ".gitkeep" : continue
+            file_list.append( file )
+
+    file_list.sort()
+    file_list.reverse()
+    #response = render_template("index.html", file_list)
+    return render_template('movie.html', imagelist=file_list, showbg = False)
+
 @app.route('/display')
 def display_image():    #filename
     file_list = []
